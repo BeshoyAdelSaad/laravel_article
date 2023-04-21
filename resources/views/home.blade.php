@@ -35,26 +35,25 @@
             <a href="{{route('article.create')}}" class="btn btn-primary w-auto">Create article</a>
         </div>
 
-      
-        
-
         <hr>
         @foreach ($articles as $article)
-            <div class="row shadow-sm bg-white rounded p-3 position-relative">
+            <div class="row shadow-sm bg-white rounded p-3 mb-4 position-relative">
 
-                <div class="  col h2 m-auto text-center">
-                        Article title
-                </div>
+                <div class="  col h2 m-auto text-center">{{ $article->title}}</div>
                     
-                <div class="col shadow-sm text-center bg-light"><img src="{{asset('image-blog-mysql-php.jpg')}}" width="300" height="100" alt=""></div>
+                <div class="col shadow-sm text-center bg-light"><img src="{{asset('Articles/images/'. $article->article_image)}}" width="300" height="100" alt="Main article picture"></div>
 
                 <div class="col position-relative ">
                     <div class="position-absolute top-50 start-50 translate-middle">
-                        <a href="#" class="btn btn-primary m-2">Edit</a>
-                        <a href="#" class="btn btn-danger m-2">Delete</a>
+                        <form action="{{route('article.destroy', $article->id)}}" method="POST">
+                            <a href="{{route('article.edit', $article->id)}}" class="btn btn-primary m-2">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-danger m-2" value="Delete">
+                        </form>
                     </div>
                 </div>
-                <a href="#" class="position-absolute bottom-0 start-0 text-secondary my-2">View article details...</a>
+                <a href="{{route('article.show', $article->id)}}" class="position-absolute bottom-0 start-0 text-secondary my-2">View article details...</a>
             </div>
         @endforeach
 
