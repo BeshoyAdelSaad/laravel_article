@@ -6,7 +6,6 @@ use App\Models\Article;
 use App\Models\ArticleImage;
 use App\Traits\HandleArticle;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {

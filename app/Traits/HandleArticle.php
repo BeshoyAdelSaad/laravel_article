@@ -8,7 +8,7 @@ trait HandleArticle
     public function rules()
     {
         return [
-            'title' => ['required', 'alpha_num'],
+            'title' => ['required', 'alpha_num', 'unique:articles,title'],
             'description' => ['max:1000'],
             'article_image' => ['required'],
             'images' => ['required']
