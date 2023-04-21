@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $articles = Article::all();
+    return view('home', ['articles' => $articles]);
+});
+    
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -27,5 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('article', ArticleController::class);
 
 require __DIR__.'/auth.php';
